@@ -51,7 +51,7 @@ def main():
                 gt = np.array(gt)
                 w, h = img.size
                 img_var = img_transform(img).unsqueeze(0).cuda()
-                res = net(img_var)
+                res = torch.sigmoid(net(img_var))
                 prediction = np.array(transforms.Resize((h, w))(to_pil(res.data.squeeze(0).cpu())))
                 # prediction = crf_refine(np.array(img.convert('RGB')), prediction)
 
